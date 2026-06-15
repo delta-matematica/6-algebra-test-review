@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algebra Practice Test - Grade 6</title>
+    
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            options: {
+                ignoreHtmlClass: 'tex2jax_ignore',
+                processHtmlClass: 'tex2jax_process'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --navy-dark: #0f172a;     /* Deep Navy Background */
+            --navy-canvas: #1e293b;   /* Mid Navy for Card Canvas */
+            --yellow-accent: #b45309; /* Darker, High-Contrast Amber Gold */
+            --yellow-hover: #d97706;  /* Deeper Amber Highlight */
+            --text-light: #f8fafc;    /* Clean Off-White Text */
+            --text-muted: #94a3b8;    /* Soft Muted Gray Text */
+            --success: #10b981;       /* Clean Green */
+            --error: #ef4444;         /* Clean Red */
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        body { background-color: var(--navy-dark); color: var(--text-light); display: flex; flex-direction: column; min-height: 100vh; }
+        
+        header { background: var(--navy-canvas); text-align: center; padding: 1.2rem; border-bottom: 2px solid var(--yellow-accent); }
+        header h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--yellow-accent); font-weight: 600; }
+        
+        /* Expanded High-Visibility Copyright Footer Layout */
+        footer { background: var(--navy-canvas); text-align: center; padding: 2rem 1.5rem; border-top: 2px solid var(--yellow-accent); margin-top: auto; font-size: 1.15rem; font-weight: 700; color: var(--text-light); letter-spacing: 1px; line-height: 1.6; }
+        footer .author-line { color: var(--yellow-accent); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 2px; }
+
+        .container { max-width: 1000px; width: 100%; margin: auto; padding: 2rem 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .card { background: var(--navy-canvas); width: 100%; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); border: 2px solid var(--yellow-accent); overflow: hidden; }
+        
+        /* Cover Design Layout */
+        .title-screen { display: flex; flex-direction: column; align-items: center; padding: 5.5rem 2rem; text-align: center; position: relative; }
+        .badge { background-color: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2rem; display: inline-block; border: 2px solid var(--yellow-accent); }
+        .title-screen h1 { font-size: 4rem; color: var(--text-light); font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 0.75rem; }
+        .title-screen h2 { font-size: 2.2rem; color: var(--yellow-accent); font-weight: 800; margin-bottom: 3.5rem; }
+        
+        /* Two Column Layout */
+        .test-screen { display: none; padding: 2.5rem; }
+        .split-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; min-height: 320px; }
+        .left-col { border-right: 2px solid var(--yellow-accent); padding-right: 3rem; display: flex; flex-direction: column; justify-content: center; }
+        .right-col { display: flex; flex-direction: column; justify-content: center; gap: 0.85rem; }
+        
+        .question-text { font-size: 1.35rem; font-weight: 600; color: var(--text-light); line-height: 1.5; }
+        .hint-box { margin-top: 1.5rem; padding: 1rem; background: var(--navy-dark); border-left: 4px solid var(--yellow-accent); border-radius: 4px; font-size: 0.95rem; color: var(--text-muted); display: none; line-height: 1.4; border-top: 1px solid rgba(180, 83, 9, 0.2); border-right: 1px solid rgba(180, 83, 9, 0.2); border-bottom: 1px solid rgba(180, 83, 9, 0.2); }
+        
+        /* Interactive Graphic Canvas Context */
+        .canvas-container { margin: 1.5rem 0 0.5rem 0; width: 100%; display: none; background: var(--navy-dark); padding: 1rem; border-radius: 8px; border: 1px dashed rgba(180, 83, 9, 0.3); }
+        canvas { width: 100%; height: auto; display: block; margin: 0 auto; }
+
+        /* Function Table Design Elements */
+        .table-container { margin: 1.5rem 0; width: 100%; display: flex; justify-content: center; }
+        .math-table { border-collapse: collapse; background: var(--navy-dark); border: 2px solid var(--yellow-accent); border-radius: 6px; overflow: hidden; font-weight: 600; font-size: 1.1rem; text-align: center; }
+        .math-table th, .math-table td { padding: 0.75rem 1.5rem; border: 1px solid rgba(180, 83, 9, 0.4); color: var(--text-light); }
+        .math-table th { background: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); }
+
+        /* Interactive Buttons */
+        .btn { padding: 0.9rem 2rem; border: 2px solid var(--yellow-accent); border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; }
+        .btn-primary { background: var(--navy-dark); color: var(--yellow-accent); }
+        .btn-primary:hover { background: var(--yellow-accent); color: var(--navy-dark); transform: translateY(-1px); }
+        .btn-start { background: var(--yellow-accent); color: var(--text-light); padding: 1.2rem 4rem; font-size: 1.25rem; font-weight: 800; border-radius: 50px; border: none; }
+        .btn-start:hover { background: var(--yellow-hover); transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(180, 83, 9, 0.5); }
+        
+        .choice-btn { background: var(--navy-dark); border: 2px solid rgba(180, 83, 9, 0.4); text-align: left; padding: 1.1rem; width: 100%; border-radius: 10px; font-size: 1.05rem; color: var(--text-light); font-weight: 500; transition: all 0.15s ease; cursor: pointer; }
+        .choice-btn:hover:not(:disabled) { border-color: var(--yellow-accent); background: rgba(180, 83, 9, 0.05); transform: translateX(2px); }
+        .choice-btn:disabled { cursor: not-allowed; opacity: 0.8; }
+        .choice-btn.correct { background: #064e3b !important; border-color: var(--success) !important; color: #a7f3d0 !important; font-weight: 600; }
+        .choice-btn.incorrect { background: #7f1d1d !important; border-color: var(--error) !important; color: #fca5a5 !important; }
+
+        /* Navigation Layout */
+        .controls-bar { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; border-top: 2px solid var(--yellow-accent); padding-top: 2rem; }
+        .nav-row { display: flex; gap: 1rem; width: 100%; justify-content: space-between; }
+        .pagination { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+        .page-num { width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(180, 83, 9, 0.4); background: var(--navy-dark); border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: all 0.15s ease; color: var(--text-light); }
+        .page-num:hover { border-color: var(--yellow-accent); }
+        .page-num.active { background: var(--yellow-accent); color: var(--text-light); border-color: var(--yellow-accent); }
+        .page-num.answered { border-color: var(--yellow-accent); background: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); }
+
+        /* Score Dashboard Layout & Final Branching Buttons */
+        .score-screen { display: none; text-align: center; padding: 4rem 2rem; }
+        .score-display { font-size: 4rem; font-weight: 800; color: var(--yellow-accent); margin: 1.5rem 0; letter-spacing: -1px; }
+        .btn-stack { display: flex; gap: 1.25rem; justify-content: center; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
+
+        @media (max-width: 850px) {
+            .split-container { grid-template-columns: 1fr; gap: 2rem; }
+            .left-col { border-right: none; padding-right: 0; border-bottom: 2px solid var(--yellow-accent); padding-bottom: 2rem; }
+            .title-screen h1 { font-size: 2.8rem; }
+            .title-screen h2 { font-size: 1.75rem; }
+            .btn-stack { flex-direction: column; width: 100%; }
+            .btn-stack .btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>Practice Test Generator</h2>
+    </header>
+
+    <div class="container">
+        <div id="titleScreen" class="card title-screen">
+            <span class="badge">Curriculum Assessment</span>
+            <h1>Algebra Practice Test</h1>
+            <h2>Grade 6</h2>
+            <button class="btn btn-start" onclick="startTest()">Start Evaluation</button>
+        </div>
+
+        <div id="testScreen" class="card test-screen tex2jax_process">
+            <div class="split-container">
+                <div class="left-col">
+                    <div id="questionNumberDisplay" style="color: var(--yellow-accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 0.75rem;">Question 1 of 25</div>
+                    <div id="questionText" class="question-text">Loading problem prompt...</div>
+                    
+                    <div id="canvasContainer" class="canvas-container">
+                        <canvas id="balanceCanvas" width="500" height="320"></canvas>
+                    </div>
+
+                    <div id="tablePlacement" class="table-container"></div>
+
+                    <button class="btn" style="margin-top: 1.5rem; background: var(--navy-dark); font-size: 0.85rem; width: fit-content; padding: 0.5rem 1rem; color: var(--yellow-accent); border: 2px solid var(--yellow-accent);" onclick="toggleHint()">💡 Review Strategy Hint</button>
+                    <div id="hintBox" class="hint-box"></div>
+                </div>
+                <div class="right-col" id="choicesContainer"></div>
+            </div>
+
+            <div class="controls-bar">
+                <div class="pagination" id="paginationContainer"></div>
+                <div class="nav-row">
+                    <button class="btn btn-primary" id="prevBtn" onclick="navigate(-1)">← Back</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="navigate(1)">Continue →</button>
+                    <button class="btn btn-primary" id="submitTestBtn" style="border-color: var(--success); color: #51cfa3; display: none;" onclick="showResults()">Submit Final Scores</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="scoreScreen" class="card score-screen">
+            <span class="badge">Analysis Completed</span>
+            <h1>Performance Analytics</h1>
+            <div class="score-display" id="finalScore">0 / 25</div>
+            <p id="scoreFeedback" style="margin-bottom: 1.5rem; font-size: 1.15rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;"></p>
+            
+            <div class="btn-stack">
+                <button class="btn" style="background: var(--yellow-accent); color: var(--text-light); border: none; font-weight: 700; padding: 1rem 2rem;" onclick="restartTest(true)">🔄 Try Again (New Question Set)</button>
+                <button class="btn btn-primary" style="padding: 1rem 2rem;" onclick="restartTest(false)">🏠 Go Back (Main Screen)</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="author-line">DELTA MATEMATICA | LUIS RAMOS JR.</div>
+        <div>&copy; 2026 Algebra Practice Test Platform. All Rights Reserved. Confidential & Secure.</div>
+    </footer>
+
+    <script>
+        // Core structural questions layout definitions
+        let baseQuestions = [
+            { id: 1, type: "trans1" }, { id: 2, type: "trans2" }, { id: 3, type: "seq1" }, { id: 4, type: "seq2" },
+            { id: 5, type: "seq_rule1" }, { id: 6, type: "seq_rule2" }, { id: 7, type: "eq_two1" }, { id: 8, type: "eq_two2" },
+            { id: 9, type: "eq_two3" }, { id: 10, type: "eq_one1" }, { id: 11, type: "eq_one2" }, { id: 12, type: "word1" },
+            { id: 13, type: "word2" }, { id: 14, type: "scale1" }, { id: 15, type: "scale2" }, { id: 16, type: "seesaw1" },
+            { id: 17, type: "seesaw2" }, { id: 18, type: "ineq1" }, { id: 19, type: "ineq2" }, { id: 20, type: "grid1" },
+            { id: 21, type: "grid2" }, { id: 22, type: "grid3" }, { id: 23, type: "grid4" }, { id: 24, type: "table1" },
+            { id: 25, type: "table2" }
+        ];
+
+        let questions = [];
+        let currentIdx = 0;
+        let userAnswers = [];
+
+        // Procedural generation engine to completely mutate equations and values on demand
+        function generateDynamicDataset() {
+            questions = baseQuestions.map(item => {
+                let rNum = () => Math.floor(Math.random() * 10) + 2; 
+                let rVal = () => Math.floor(Math.random() * 20) + 15;
+                
+                switch(item.type) {
+                    case "trans1": {
+                        let dec = Math.floor(Math.random() * 15) + 5;
+                        let res = Math.floor(Math.random() * 30) + 20;
+                        return { q: `Translate to an algebraic sentence: 'A number $y$ is decreased by $${dec}$, and the result is $${res}$.'`, c: [`$y - ${dec} = ${res}$`, `$${dec} - y = ${res}$`, `$y + ${dec} = ${res}$`, `$y \\cdot ${dec} = ${res}$`], a: 0, h: "Decreased by signals subtraction directly from your starting variable." };
+                    }
+                    case "trans2": {
+                        let mul = Math.floor(Math.random() * 8) + 3;
+                        let yld = mul * (Math.floor(Math.random() * 9) + 4);
+                        return { q: `Translate to an algebraic sentence: '$${mul}$ times a number $x$ yields $${yld}$.'`, c: [`$${mul} + x = ${yld}$`, `$${mul}x = ${yld}$`, `$x - ${mul} = ${yld}$`, `$x + ${mul} = ${yld}$`], a: 1, h: "'Times' indicates standard multiplication between the target coefficient and variable." };
+                    }
+                    case "seq1": {
+                        let start = Math.floor(Math.random() * 6) + 2;
+                        let diff = Math.floor(Math.random() * 5) + 4;
+                        let s1 = start, s2 = s1 + diff, s3 = s2 + diff, s4 = s3 + diff, s5 = s4 + diff, s6 = s5 + diff;
+                        return { q: `Find the missing number in the sequence: $${s1}, ${s2}, ${s3}, \\dots, ${s5}, ${s6}$.`, c: [`$${s4 - 2}$`, `$${s4 + 1}$`, `$${s4}$`, `$${s4 + 3}$`], a: 2, h: "Calculate the fixed step addition interval setting consecutive numbers apart." };
+                    }
+                    case "seq2": {
+                        let diff = Math.floor(Math.random() * 4) + 6;
+                        let end = Math.floor(Math.random() * 15) + 20;
+                        let s5 = end, s4 = s5 + diff, s3 = s4 + diff, s2 = s3 + diff, s1 = s2 + diff;
+                        return { q: `Find the missing number in the sequence: $${s1}, ${s2}, ${s3}, \\dots, ${s5}$.`, c: [`$${s4 - 3}$`, `$${s4}$`, `$${s4 + 2}$`, `$${s4 - 1}$`], a: 1, h: "Identify the constant reduction deduction occurring systematically at each position change." };
+                    }
+                    case "seq_rule1": {
+                        let d = Math.floor(Math.random() * 3) + 3;
+                        let offset = Math.floor(Math.random() * 4) + 1;
+                        let s1 = d - offset, s2 = 2*d - offset, s3 = 3*d - offset, s4 = 4*d - offset;
+                        return { q: `Which rule describes the sequence $${s1}, ${s2}, ${s3}, ${s4}, \\dots$ where $n$ represents the sequence position?`, c: [`$${d}n + ${offset}$`, `$${d+1}n - ${offset}$`, `$${d}n - ${offset}$`, `$n + ${d}$`], a: 2, h: "The consistent difference rate always maps directly as the multiplier attached to variable n." };
+                    }
+                    case "seq_rule2": {
+                        let d = Math.floor(Math.random() * 3) + 2;
+                        let offset = Math.floor(Math.random() * 4) + 1;
+                        let s1 = d + offset, s2 = 2*d + offset, s3 = 3*d + offset, s4 = 4*d + offset;
+                        return { q: `What is the algebraic rule for the sequence $${s1}, ${s2}, ${s3}, ${s4}, \\dots$ where $n$ is the sequence position?`, c: [`$${d}n + ${offset}$`, `$${d+2}n$`, `$${d}n - ${offset}$`, `$${offset}n + ${d}$`], a: 0, h: "Isolate the sequence jump value first, then reconcile the balance constant for base step 1." };
+                    }
+                    case "eq_two1": {
+                        let x = Math.floor(Math.random() * 5) + 3;
+                        let co = Math.floor(Math.random() * 3) + 2;
+                        let k = Math.floor(Math.random() * 6) + 4;
+                        let rhs = co * x + k;
+                        return { q: `Solve the two-step equation: $${co}x + ${k} = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${x + 4}$`, `$${x + 1}$`], a: 1, h: "Perform the inverse process for structural adjustments by taking constant from both sides." };
+                    }
+                    case "eq_two2": {
+                        let x = Math.floor(Math.random() * 6) + 4;
+                        let co = Math.floor(Math.random() * 3) + 2;
+                        let k = Math.floor(Math.random() * 5) + 3;
+                        let rhs = co * x - k;
+                        return { q: `Solve the two-step equation: $${co}x - ${k} = ${rhs}$`, c: [`$${x + 3}$`, `$${x - 1}$`, `$${x}$`, `$${x + 2}$`], a: 2, h: "Clear the subtraction element away using addition before dealing with the multiplier." };
+                    }
+                    case "eq_two3": {
+                        let x = Math.floor(Math.random() * 4) + 5;
+                        let co = Math.floor(Math.random() * 3) + 4;
+                        let k = Math.floor(Math.random() * 6) + 2;
+                        let rhs = co * x - k;
+                        return { q: `Solve the two-step equation: $${co}x - ${k} = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${x + 1}$`, `$${rhs + k}$`], a: 1, h: "Neutralize negative integers on the active layout by summing the value across." };
+                    }
+                    case "eq_one1": {
+                        let x = Math.floor(Math.random() * 15) + 10;
+                        let k = Math.floor(Math.random() * 15) + 5;
+                        let rhs = x + k;
+                        return { q: `Solve the one-step equation: $x + ${k} = ${rhs}$`, c: [`$${x - 5}$`, `$${x}$`, `$${x + 10}$`, `$${rhs + k}$`], a: 1, h: "Isolate x cleanly by calculating with the inverse behavior of basic addition." };
+                    }
+                    case "eq_one2": {
+                        let x = Math.floor(Math.random() * 6) + 6;
+                        let co = Math.floor(Math.random() * 5) + 5;
+                        let rhs = co * x;
+                        return { q: `Solve the one-step equation: $${co}x = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${rhs - co}$`, `$${rhs * co}$`], a: 1, h: "Unbind values tied via coefficients by executing systemic division blocks." };
+                    }
+                    case "word1": {
+                        let flat = Math.floor(Math.random() * 15) + 15;
+                        let perM = Math.floor(Math.random() * 3) + 2;
+                        let miles = Math.floor(Math.random() * 20) + 15;
+                        let tot = flat + perM * miles;
+                        return { q: `A car rental costs $\\$${flat}$ plus $\\$${perM}$ per mile driven. If the total bill is $\\$${tot}$, which equation can be used to find the number of miles ($m$) driven?`, c: [`$${perM}m + ${flat} = ${tot}$`, `$${flat}m + ${perM} = ${tot}$`, `$${perM}m - ${flat} = ${tot}$`, `$${flat} + m = ${tot}$`], a: 0, h: "The flat fee acts as a constant, while the cost per mile scales with the variable m." };
+                    }
+                    case "word2": {
+                        let books = Math.floor(Math.random() * 3) + 3;
+                        let costB = Math.floor(Math.random() * 4) + 2;
+                        let pen = Math.floor(Math.random() * 3) + 2;
+                        let tot = books * costB + pen;
+                        return { q: `Sam bought $${books}$ identical notebooks and a pen that costs $\\$${pen}$. If his total bill was $\\$${tot}$, how much did each notebook cost?`, c: [`$\\$${costB - 1}$`, `$\\$${costB}$`, `$\\$${costB + 1}$`, `$\\$${costB + 2}$`], a: 1, h: "Subtract the cost of the pen from the total before dividing by the number of notebooks." };
+                    }
+                    case "scale1": return { q: "On a balanced scale, the left side has $3$ blocks of mass $x$ and a $5\\text{g}$ weight. The right side has a $20\\text{g}$ weight. Find $x$.", c: ["$5$", "$7$", "$15$", "$25$"], a: 0, h: "Prune identical auxiliary mass indicators evenly off baseline platforms.", type: "scale1" };
+                    case "scale2": return { q: "A balance scale is perfectly level. The left side holds $2$ blocks of mass $x$ and a $4\\text{kg}$ weight. The right side holds a $14\\text{kg}$ weight. Find $x$.", c: ["$5$", "$6$", "$9$", "$10$"], a: 0, h: "Formulate the linear state calculation structure directly: $2x + 4 = 14$.", type: "scale2" };
+                    case "seesaw1": return { q: "A seesaw is perfectly balanced. Left side: an unknown weight $w$ and a $10\\text{kg}$ weight. Right side: a $35\\text{kg}$ weight. Express this equation.", c: ["$10w = 35$", "$w - 10 = 35$", "$w + 10 = 35$", "$w + 35 = 10$"], a: 2, h: "Co-existing spatial components share additive parameters on a structural plane side.", type: "seesaw1" };
+                    case "seesaw2": return { q: "A balanced seesaw carries a crate of weight $x$ and a $15\\text{kg}$ pack on the left. The right side holds $45\\text{kg}$. Identify the equation.", c: ["$x - 15 = 45$", "$15x = 45$", "$x = 45 + 15$", "$x + 15 = 45$"], a: 3, h: "Group parallel platform layout characteristics visually to construct standard equations.", type: "seesaw2" };
+                    case "ineq1": {
+                        let k = Math.floor(Math.random() * 6) + 4;
+                        let r = Math.floor(Math.random() * 10) + 10;
+                        return { q: `Solve the one-step inequality: $x - ${k} > ${r}$`, c: [`$x > ${r - k}$`, `$x < ${r - k}$`, `$x > ${r + k}$`, `$x < ${r + k}$`], a: 2, h: "Inequality directional parameters hold unless handling standard negative multipliers." };
+                    }
+                    case "ineq2": {
+                        let co = Math.floor(Math.random() * 4) + 3;
+                        let factor = Math.floor(Math.random() * 5) + 4;
+                        let r = co * factor;
+                        return { q: `Solve the one-step inequality: $${co}x \\le ${r}$`, c: [`$x \\le ${factor}$`, `$x \\ge ${factor}$`, `$x \\le ${r - co}$`, `$x \\le ${r * co}$`], a: 0, h: "Isolate structural variables directly through single-step reduction." };
+                    }
+                    case "grid1": return { q: "Identify the coordinate structure matching the highlighted point $P$ plotted on the coordinate grid layer.", c: ["$(4, -3)$", "$(-3, 4)$", "$(-4, -3)$", "$(4, 3)$"], a: 0, h: "Coordinates track horizontal variations (x values) first, followed by vertical values (y).", type: "grid1" };
+                    case "grid2": return { q: "What are the coordinate measurements belonging to the central axis intersection point highlighted on the grid?", c: ["$(0, 0)$", "$(1, 1)$", "$(0, 1)$", "$(1, 0)$"], a: 0, h: "The absolute nexus zero point where spatial grid axis lines cross.", type: "grid2" };
+                    case "grid3": return { q: "Analyze the coordinate grid below carefully. What are the spatial coordinates of the highlighted point $Q$?", c: ["$(5, -2)$", "$(-2, 5)$", "$(-2, -5)$", "$(2, 5)$"], a: 1, h: "Trace your horizontal alignment displacement along the horizontal track first.", type: "grid3" };
+                    case "grid4": return { q: "A shape vertex point $A$ is translated to a new position labeled $A'$. Identify the final coordinate layout of $A'$.", c: ["$(-2, 1)$", "$(6, 5)$", "$(-2, 5)$", "$(6, 1)$"], a: 0, h: "Count units leftward along x axis, and units downward along y axis to find your spot.", type: "grid4" };
+                    case "table1": {
+                        let m = Math.floor(Math.random() * 2) + 2; 
+                        let b = Math.floor(Math.random() * 3) + 1; 
+                        return { q: "Look at the patterns matching values inside the function data block. Which equation accurately models the relationship between $x$ and $y$?", c: [`$y = ${m-1}x + ${b}$`, `$y = ${m}x - ${b}$`, `$y = ${m+1}x - 2$`, `$y = ${m}x$`], a: 1, h: "Determine the linear change step in y for each single value step increment in x.", type: "table1", vars: {m: m, b: -b} };
+                    }
+                    case "table2": {
+                        let m = Math.floor(Math.random() * 2) + 2;
+                        let b = Math.floor(Math.random() * 3) + 3;
+                        return { q: "Analyze the input-output combinations mapped inside the algebraic table matrix. Which functional rule defines the layout pattern?", c: [`$y = x + ${b+1}$`, `$y = ${m}x + ${b}$`, `$y = ${m+1}x + ${b-1}$`, `$y = ${m}x + ${b-2}$`], a: 1, h: "Test your multiplier rates on input zero or position step 1 to locate the offset.", type: "table2", vars: {m: m, b: b} };
+                    }
+                }
+            });
+        }
+
+        function startTest() {
+            generateDynamicDataset();
+            userAnswers = Array(questions.length).fill(null);
+            currentIdx = 0;
+            document.getElementById('titleScreen').style.display = 'none';
+            document.getElementById('testScreen').style.display = 'block';
+            buildPagination();
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const qData = questions[currentIdx];
+            document.getElementById('questionNumberDisplay').innerText = `Question ${currentIdx + 1} of ${questions.length}`;
+            document.getElementById('questionText').innerHTML = qData.q;
+            document.getElementById('hintBox').innerText = qData.h;
+            document.getElementById('hintBox').style.display = 'none';
+
+            const cc = document.getElementById('canvasContainer');
+            const tp = document.getElementById('tablePlacement');
+            const canvas = document.getElementById('balanceCanvas');
+            
+            if (qData.type && qData.type.startsWith('grid')) {
+                cc.style.display = 'block';
+                tp.style.display = 'none';
+                canvas.height = 320;
+                drawDiagram(qData.type);
+            } else if (qData.type && (qData.type.startsWith('scale') || qData.type.startsWith('seesaw'))) {
+                cc.style.display = 'block';
+                tp.style.display = 'none';
+                canvas.height = 240;
+                drawDiagram(qData.type);
+            } else if (qData.type && qData.type.startsWith('table')) {
+                cc.style.display = 'none';
+                tp.style.display = 'flex';
+                buildFunctionTable(qData);
+            } else {
+                cc.style.display = 'none';
+                tp.style.display = 'none';
+            }
+
+            const container = document.getElementById('choicesContainer');
+            container.innerHTML = '';
+
+            qData.c.forEach((choice, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'choice-btn';
+                btn.innerHTML = choice;
+                btn.onclick = () => handleSelect(index);
+                
+                if (userAnswers[currentIdx] !== null) {
+                    btn.disabled = true;
+                    if (index === qData.a) btn.classList.add('correct');
+                    if (index === userAnswers[currentIdx] && index !== qData.a) btn.classList.add('incorrect');
+                }
+                container.appendChild(btn);
+            });
+
+            document.getElementById('prevBtn').disabled = currentIdx === 0;
+            if (currentIdx === questions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitTestBtn').style.display = 'inline-flex';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-flex';
+                document.getElementById('submitTestBtn').style.display = 'none';
+            }
+            updatePaginationUI();
+            
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        function buildFunctionTable(qData) {
+            const tp = document.getElementById('tablePlacement');
+            let m = qData.vars.m;
+            let b = qData.vars.b;
+            let content = "";
+            
+            if (qData.type === 'table1') {
+                content = `
+                    <table class="math-table">
+                        <tr><th>Input ($x$)</th><td>$1$</td><td>$2$</td><td>$3$</td><td>$4$</td><td>$5$</td></tr>
+                        <tr><th>Output ($y$)</th><td>$${m*1+b}$</td><td>$${m*2+b}$</td><td>$${m*3+b}$</td><td>$${m*4+b}$</td><td>$${m*5+b}$</td></tr>
+                    </table>`;
+            } else if (qData.type === 'table2') {
+                content = `
+                    <table class="math-table">
+                        <tr><th>Input ($x$)</th><td>$0$</td><td>$1$</td><td>$2$</td><td>$3$</td><td>$4$</td></tr>
+                        <tr><th>Output ($y$)</th><td>$${m*0+b}$</td><td>$${m*1+b}$</td><td>$${m*2+b}$</td><td>$${m*3+b}$</td><td>$${m*4+b}$</td></tr>
+                    </table>`;
+            }
+            tp.innerHTML = content;
+        }
+
+        function drawDiagram(type) {
+            const canvas = document.getElementById('balanceCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.textBaseline = 'middle';
+            ctx.textAlign = 'center';
+
+            if (type.startsWith('scale')) {
+                ctx.strokeStyle = '#94a3b8'; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.moveTo(250, 40); ctx.lineTo(250, 180); ctx.moveTo(200, 180); ctx.lineTo(300, 180); ctx.stroke();
+                ctx.strokeStyle = '#b45309'; ctx.beginPath(); ctx.moveTo(80, 60); ctx.lineTo(420, 60); ctx.stroke();
+                ctx.strokeStyle = '#64748b'; ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(80, 60); ctx.lineTo(50, 130); ctx.moveTo(80, 60); ctx.lineTo(110, 130);
+                ctx.moveTo(420, 60); ctx.lineTo(390, 130); ctx.moveTo(420, 60); ctx.lineTo(450, 130); ctx.stroke();
+                ctx.strokeStyle = '#b45309'; ctx.lineWidth = 4;
+                ctx.beginPath(); ctx.moveTo(40, 130); ctx.lineTo(120, 130); ctx.moveTo(380, 130); ctx.lineTo(460, 130); ctx.stroke();
+
+                ctx.font = 'bold 13px sans-serif';
+                if (type === 'scale1') {
+                    drawBlock(ctx, 48, 105, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 70, 105, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 92, 105, 'x', '#1e293b', '#b45309');
+                    drawBlock(ctx, 70, 80, '5g', '#0f172a', '#10b981'); drawBlock(ctx, 400, 100, '20g', '#0f172a', '#10b981', 35, 30);
+                } else {
+                    drawBlock(ctx, 55, 105, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 80, 105, 'x', '#1e293b', '#b45309');
+                    drawBlock(ctx, 67, 80, '4kg', '#0f172a', '#10b981'); drawBlock(ctx, 400, 100, '14kg', '#0f172a', '#10b981', 35, 30);
+                }
+            } else if (type.startsWith('seesaw')) {
+                ctx.strokeStyle = '#94a3b8'; ctx.fillStyle = '#334155'; ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.moveTo(250, 150); ctx.lineTo(230, 190); ctx.lineTo(270, 190); ctx.closePath(); ctx.fill(); ctx.stroke();
+                ctx.strokeStyle = '#b45309'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(50, 150); ctx.lineTo(450, 150); ctx.stroke();
+
+                ctx.font = 'bold 13px sans-serif';
+                if (type === 'seesaw1') {
+                    drawBlock(ctx, 90, 120, 'w', '#1e293b', '#b45309'); drawBlock(ctx, 130, 120, '10kg', '#0f172a', '#10b981', 35, 30);
+                    drawBlock(ctx, 350, 110, '35kg', '#0f172a', '#10b981', 45, 40);
+                } else if (type === 'seesaw2') {
+                    drawBlock(ctx, 90, 120, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 130, 120, '15kg', '#0f172a', '#10b981', 35, 30);
+                    drawBlock(ctx, 350, 110, '45kg', '#0f172a', '#10b981', 45, 40);
+                }
+            } else if (type.startsWith('grid')) {
+                const centerX = 250, centerY = 160, scale = 22;
+                ctx.strokeStyle = 'rgba(148, 163, 184, 0.40)'; ctx.lineWidth = 1;
+                for (let i = -11; i <= 11; i++) {
+                    ctx.beginPath(); ctx.moveTo(centerX + i * scale, 10); ctx.lineTo(centerX + i * scale, 310); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(centerX - 240, centerY + i * scale); ctx.lineTo(centerX + 240, centerY + i * scale); ctx.stroke();
+                }
+                ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2.5;
+                ctx.beginPath(); ctx.moveTo(centerX - 230, centerY); ctx.lineTo(centerX + 230, centerY); ctx.moveTo(centerX, 10); ctx.lineTo(centerX, 310); ctx.stroke();
+
+                ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px sans-serif'; ctx.fillText('x', centerX + 240, centerY); ctx.fillText('y', centerX, 5);
+                ctx.font = 'bold 10px sans-serif'; ctx.fillStyle = '#94a3b8';
+                for(let i = -10; i <= 10; i++) {
+                    if(i === 0) continue;
+                    ctx.fillText(i, centerX + i * scale, centerY + 14); ctx.fillText(-i, centerX - 14, centerY + i * scale);
+                }
+
+                if (type === 'grid1') { plotPoint(ctx, centerX + 4 * scale, centerY + 3 * scale, 'P', '#b45309'); }
+                else if (type === 'grid2') { plotPoint(ctx, centerX, centerY, 'Origin', '#b45309'); }
+                else if (type === 'grid3') { plotPoint(ctx, centerX - 2 * scale, centerY - 5 * scale, 'Q', '#b45309'); }
+                else if (type === 'grid4') {
+                    plotPoint(ctx, centerX + 2 * scale, centerY - 3 * scale, 'A', '#64748b'); plotPoint(ctx, centerX - 2 * scale, centerY - 1 * scale, "A'", '#10b981');
+                    ctx.strokeStyle = '#b45309'; ctx.lineWidth = 2; ctx.setLineDash([5, 5]);
+                    ctx.beginPath(); ctx.moveTo(centerX + 2 * scale, centerY - 3 * scale); ctx.lineTo(centerX - 2 * scale, centerY - 1 * scale); ctx.stroke(); ctx.setLineDash([]);
+                }
+            }
+        }
+
+        function drawBlock(ctx, x, y, label, bg, border, w=22, h=25) {
+            ctx.fillStyle = bg; ctx.fillRect(x, y, w, h); ctx.strokeStyle = border; ctx.lineWidth = 2; ctx.strokeRect(x, y, w, h);
+            ctx.fillStyle = '#f8fafc'; ctx.fillText(label, x + (w/2), y + (h/2));
+        }
+
+        function plotPoint(ctx, px, py, label, color) {
+            ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, 6, 0, 2 * Math.PI); ctx.fill();
+            ctx.strokeStyle = '#0f172a'; ctx.lineWidth = 1.5; ctx.stroke();
+            ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px sans-serif'; ctx.fillText(label, px + 15, py - 12);
+        }
+
+        function handleSelect(choiceIdx) {
+            if (userAnswers[currentIdx] !== null) return; 
+            userAnswers[currentIdx] = choiceIdx;
+            loadQuestion();
+        }
+
+        function toggleHint() {
+            const hb = document.getElementById('hintBox');
+            hb.style.display = hb.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function buildPagination() {
+            const pagContainer = document.getElementById('paginationContainer');
+            pagContainer.innerHTML = '';
+            questions.forEach((_, idx) => {
+                const pBtn = document.createElement('div');
+                pBtn.className = 'page-num';
+                pBtn.innerText = idx + 1;
+                pBtn.onclick = () => jumpToQuestion(idx);
+                pagContainer.appendChild(pBtn);
+            });
+        }
+
+        function updatePaginationUI() {
+            const elements = document.querySelectorAll('.page-num');
+            elements.forEach((el, idx) => {
+                el.className = 'page-num';
+                if (idx === currentIdx) el.classList.add('active');
+                else if (userAnswers[idx] !== null) el.classList.add('answered');
+            });
+        }
+
+        function jumpToQuestion(idx) { currentIdx = idx; loadQuestion(); }
+        function navigate(dir) { 
+            currentIdx += dir; 
+            if(currentIdx < 0) currentIdx = 0;
+            if(currentIdx >= questions.length) currentIdx = questions.length - 1;
+            loadQuestion(); 
+        }
+
+        function showResults() {
+            document.getElementById('testScreen').style.display = 'none';
+            document.getElementById('scoreScreen').style.display = 'block';
+            let totalCorrect = userAnswers.reduce((acc, ans, idx) => acc + (ans === questions[idx].a ? 1 : 0), 0);
+            document.getElementById('finalScore').innerText = `${totalCorrect} / ${questions.length}`;
+            
+            let percentage = (totalCorrect / questions.length) * 100;
+            let msg = percentage >= 85 ? "Excellent core concept comprehension! You are ready for advanced algebraic structures." : "Solid progression work! Review noted strategy hints to secure total proficiency.";
+            document.getElementById('scoreFeedback').innerText = msg;
+        }
+
+        function restartTest(shouldMutateDataset) {
+            document.getElementById('scoreScreen').style.display = 'none';
+            if (shouldMutateDataset) {
+                startTest();
+            } else {
+                document.getElementById('titleScreen').style.display = 'flex';
+            }
+        }
+    </script>
+</body>
+</html>
