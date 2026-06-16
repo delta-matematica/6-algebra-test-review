@@ -22,14 +22,14 @@
 
     <style>
         :root {
-            --navy-dark: #0f172a;     /* Deep Navy Background */
-            --navy-canvas: #1e293b;   /* Mid Navy for Card Canvas */
-            --yellow-accent: #b45309; /* Darker, High-Contrast Amber Gold */
-            --yellow-hover: #d97706;  /* Deeper Amber Highlight */
-            --text-light: #f8fafc;    /* Clean Off-White Text */
-            --text-muted: #94a3b8;    /* Soft Muted Gray Text */
-            --success: #10b981;       /* Clean Green */
-            --error: #ef4444;         /* Clean Red */
+            --navy-dark: #0f172a;     
+            --navy-canvas: #1e293b;   
+            --yellow-accent: #b45309; 
+            --yellow-hover: #d97706;  
+            --text-light: #f8fafc;    
+            --text-muted: #94a3b8;    
+            --success: #10b981;       
+            --error: #ef4444;         
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; }
@@ -38,20 +38,17 @@
         header { background: var(--navy-canvas); text-align: center; padding: 1.2rem; border-bottom: 2px solid var(--yellow-accent); }
         header h2 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--yellow-accent); font-weight: 600; }
         
-        /* Expanded High-Visibility Copyright Footer Layout */
         footer { background: var(--navy-canvas); text-align: center; padding: 2rem 1.5rem; border-top: 2px solid var(--yellow-accent); margin-top: auto; font-size: 1.15rem; font-weight: 700; color: var(--text-light); letter-spacing: 1px; line-height: 1.6; }
         footer .author-line { color: var(--yellow-accent); font-size: 1.3rem; font-weight: 800; margin-bottom: 0.25rem; text-transform: uppercase; letter-spacing: 2px; }
 
         .container { max-width: 1000px; width: 100%; margin: auto; padding: 2rem 1rem; flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .card { background: var(--navy-canvas); width: 100%; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3); border: 2px solid var(--yellow-accent); overflow: hidden; }
         
-        /* Cover Design Layout */
         .title-screen { display: flex; flex-direction: column; align-items: center; padding: 5.5rem 2rem; text-align: center; position: relative; }
         .badge { background-color: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); padding: 0.5rem 1.5rem; border-radius: 50px; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2rem; display: inline-block; border: 2px solid var(--yellow-accent); }
         .title-screen h1 { font-size: 4rem; color: var(--text-light); font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 0.75rem; }
         .title-screen h2 { font-size: 2.2rem; color: var(--yellow-accent); font-weight: 800; margin-bottom: 3.5rem; }
         
-        /* Two Column Layout */
         .test-screen { display: none; padding: 2.5rem; }
         .split-container { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; min-height: 320px; }
         .left-col { border-right: 2px solid var(--yellow-accent); padding-right: 3rem; display: flex; flex-direction: column; justify-content: center; }
@@ -60,17 +57,22 @@
         .question-text { font-size: 1.35rem; font-weight: 600; color: var(--text-light); line-height: 1.5; }
         .hint-box { margin-top: 1.5rem; padding: 1rem; background: var(--navy-dark); border-left: 4px solid var(--yellow-accent); border-radius: 4px; font-size: 0.95rem; color: var(--text-muted); display: none; line-height: 1.4; border-top: 1px solid rgba(180, 83, 9, 0.2); border-right: 1px solid rgba(180, 83, 9, 0.2); border-bottom: 1px solid rgba(180, 83, 9, 0.2); }
         
-        /* Interactive Graphic Canvas Context */
         .canvas-container { margin: 1.5rem 0 0.5rem 0; width: 100%; display: none; background: var(--navy-dark); padding: 1rem; border-radius: 8px; border: 1px dashed rgba(180, 83, 9, 0.3); }
         canvas { width: 100%; height: auto; display: block; margin: 0 auto; }
 
-        /* Function Table Design Elements */
+        .shape-sequence-container { display: none; width: 100%; margin: 1.5rem 0; background: var(--navy-dark); padding: 1.5rem; border-radius: 12px; border: 2px dashed rgba(180, 83, 9, 0.4); justify-content: space-around; gap: 1rem; flex-wrap: wrap; }
+        .shape-step-box { background: rgba(30, 41, 59, 0.7); padding: 1rem; border-radius: 8px; border: 1px solid rgba(180, 83, 9, 0.2); text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+        .shape-step-title { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--yellow-accent); font-weight: 700; margin-bottom: 0.75rem; }
+        .shape-grid-display { display: grid; gap: 4px; background: rgba(15, 23, 42, 0.6); padding: 8px; border-radius: 6px; min-height: 80px; align-items: center; justify-content: center; }
+        
+        .dot-node { width: 14px; height: 14px; background: var(--yellow-accent); border-radius: 50%; box-shadow: 0 0 8px rgba(180, 83, 9, 0.6); }
+        .square-node { width: 16px; height: 16px; background: #10b981; border-radius: 3px; border: 1px solid #a7f3d0; }
+
         .table-container { margin: 1.5rem 0; width: 100%; display: flex; justify-content: center; }
         .math-table { border-collapse: collapse; background: var(--navy-dark); border: 2px solid var(--yellow-accent); border-radius: 6px; overflow: hidden; font-weight: 600; font-size: 1.1rem; text-align: center; }
         .math-table th, .math-table td { padding: 0.75rem 1.5rem; border: 1px solid rgba(180, 83, 9, 0.4); color: var(--text-light); }
         .math-table th { background: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); }
 
-        /* Interactive Buttons */
         .btn { padding: 0.9rem 2rem; border: 2px solid var(--yellow-accent); border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; }
         .btn-primary { background: var(--navy-dark); color: var(--yellow-accent); }
         .btn-primary:hover { background: var(--yellow-accent); color: var(--navy-dark); transform: translateY(-1px); }
@@ -79,11 +81,9 @@
         
         .choice-btn { background: var(--navy-dark); border: 2px solid rgba(180, 83, 9, 0.4); text-align: left; padding: 1.1rem; width: 100%; border-radius: 10px; font-size: 1.05rem; color: var(--text-light); font-weight: 500; transition: all 0.15s ease; cursor: pointer; }
         .choice-btn:hover:not(:disabled) { border-color: var(--yellow-accent); background: rgba(180, 83, 9, 0.05); transform: translateX(2px); }
-        .choice-btn:disabled { cursor: not-allowed; opacity: 0.8; }
         .choice-btn.correct { background: #064e3b !important; border-color: var(--success) !important; color: #a7f3d0 !important; font-weight: 600; }
         .choice-btn.incorrect { background: #7f1d1d !important; border-color: var(--error) !important; color: #fca5a5 !important; }
 
-        /* Navigation Layout */
         .controls-bar { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.5rem; align-items: center; border-top: 2px solid var(--yellow-accent); padding-top: 2rem; }
         .nav-row { display: flex; gap: 1rem; width: 100%; justify-content: space-between; }
         .pagination { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
@@ -92,7 +92,6 @@
         .page-num.active { background: var(--yellow-accent); color: var(--text-light); border-color: var(--yellow-accent); }
         .page-num.answered { border-color: var(--yellow-accent); background: rgba(180, 83, 9, 0.15); color: var(--yellow-accent); }
 
-        /* Score Dashboard Layout & Final Branching Buttons */
         .score-screen { display: none; text-align: center; padding: 4rem 2rem; }
         .score-display { font-size: 4rem; font-weight: 800; color: var(--yellow-accent); margin: 1.5rem 0; letter-spacing: -1px; }
         .btn-stack { display: flex; gap: 1.25rem; justify-content: center; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
@@ -124,16 +123,17 @@
         <div id="testScreen" class="card test-screen tex2jax_process">
             <div class="split-container">
                 <div class="left-col">
-                    <div id="questionNumberDisplay" style="color: var(--yellow-accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 0.75rem;">Question 1 of 25</div>
+                    <div id="questionNumberDisplay" style="color: var(--yellow-accent); font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 0.75rem;">Question 1 of 28</div>
                     <div id="questionText" class="question-text">Loading problem prompt...</div>
                     
                     <div id="canvasContainer" class="canvas-container">
                         <canvas id="balanceCanvas" width="500" height="320"></canvas>
                     </div>
 
+                    <div id="shapeSequenceContainer" class="shape-sequence-container"></div>
                     <div id="tablePlacement" class="table-container"></div>
 
-                    <button class="btn" style="margin-top: 1.5rem; background: var(--navy-dark); font-size: 0.85rem; width: fit-content; padding: 0.5rem 1rem; color: var(--yellow-accent); border: 2px solid var(--yellow-accent);" onclick="toggleHint()">💡 Review Strategy Hint</button>
+                    <button class="btn" style="margin-top: 1.5rem; background: var(--navy-dark); font-size: 0.85rem; width: fit-content; padding: 0.5rem 1rem; color: var(--yellow-accent); border: 2px solid var(--yellow-accent);" onclick="toggleHint()">💡 Strategy Hint</button>
                     <div id="hintBox" class="hint-box"></div>
                 </div>
                 <div class="right-col" id="choicesContainer"></div>
@@ -152,11 +152,11 @@
         <div id="scoreScreen" class="card score-screen">
             <span class="badge">Analysis Completed</span>
             <h1>Performance Analytics</h1>
-            <div class="score-display" id="finalScore">0 / 25</div>
+            <div class="score-display" id="finalScore">0 / 28</div>
             <p id="scoreFeedback" style="margin-bottom: 1.5rem; font-size: 1.15rem; color: var(--text-muted); max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5;"></p>
             
             <div class="btn-stack">
-                <button class="btn" style="background: var(--yellow-accent); color: var(--text-light); border: none; font-weight: 700; padding: 1rem 2rem;" onclick="restartTest(true)">🔄 Try Again (New Question Set)</button>
+                <button class="btn" style="background: var(--yellow-accent); color: var(--text-light); border: none; font-weight: 700; padding: 1rem 2rem;" onclick="restartTest(true)">🔄 Try Again (New Randomized Questions)</button>
                 <button class="btn btn-primary" style="padding: 1rem 2rem;" onclick="restartTest(false)">🏠 Go Back (Main Screen)</button>
             </div>
         </div>
@@ -164,11 +164,10 @@
 
     <footer>
         <div class="author-line">DELTA MATEMATICA | LUIS RAMOS JR.</div>
-        <div>&copy; 2026 Algebra Practice Test Platform. All Rights Reserved. Confidential & Secure.</div>
+        <div>&copy; 2026 Algebra Practice Test Platform. All Rights Reserved.</div>
     </footer>
 
     <script>
-        // Core structural questions layout definitions
         let baseQuestions = [
             { id: 1, type: "trans1" }, { id: 2, type: "trans2" }, { id: 3, type: "seq1" }, { id: 4, type: "seq2" },
             { id: 5, type: "seq_rule1" }, { id: 6, type: "seq_rule2" }, { id: 7, type: "eq_two1" }, { id: 8, type: "eq_two2" },
@@ -176,129 +175,372 @@
             { id: 13, type: "word2" }, { id: 14, type: "scale1" }, { id: 15, type: "scale2" }, { id: 16, type: "seesaw1" },
             { id: 17, type: "seesaw2" }, { id: 18, type: "ineq1" }, { id: 19, type: "ineq2" }, { id: 20, type: "grid1" },
             { id: 21, type: "grid2" }, { id: 22, type: "grid3" }, { id: 23, type: "grid4" }, { id: 24, type: "table1" },
-            { id: 25, type: "table2" }
+            { id: 25, type: "table2" }, { id: 26, type: "shape_growing_dots" }, { id: 27, type: "shape_growing_squares" }, 
+            { id: 28, type: "shape_linear_dots" }
         ];
 
         let questions = [];
         let currentIdx = 0;
         let userAnswers = [];
 
-        // Procedural generation engine to completely mutate equations and values on demand
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        function createChoices(correctAns, wrongAnswers) {
+            let uniqueWrongs = [...new Set(wrongAnswers)].filter(w => w !== correctAns);
+            while(uniqueWrongs.length < 3) {
+                // If it looks like math formatting, generate math variations.
+                if (correctAns.startsWith('$')) {
+                    let fallback = parseInt(correctAns.replace(/[^0-9\-]/g, '')) || 0;
+                    let offset = Math.floor(Math.random() * 20) + 1;
+                    let item = `$${fallback + (Math.random() > 0.5 ? offset : -offset)}$`;
+                    if(item !== correctAns && !uniqueWrongs.includes(item)) uniqueWrongs.push(item);
+                } else {
+                    // Fallback word mutations if choices aren't purely mathematical
+                    uniqueWrongs.push(`Change by ${Math.floor(Math.random() * 10) + 1}`);
+                }
+            }
+            let choiceList = [correctAns, uniqueWrongs[0], uniqueWrongs[1], uniqueWrongs[2]];
+            shuffleArray(choiceList);
+            return { choices: choiceList, answerIndex: choiceList.indexOf(correctAns) };
+        }
+
         function generateDynamicDataset() {
-            questions = baseQuestions.map(item => {
-                let rNum = () => Math.floor(Math.random() * 10) + 2; 
-                let rVal = () => Math.floor(Math.random() * 20) + 15;
+            let shuffledBlueprints = shuffleArray([...baseQuestions]);
+
+            questions = shuffledBlueprints.map((item) => {
+                let variant = Math.floor(Math.random() * 3); 
                 
                 switch(item.type) {
                     case "trans1": {
                         let dec = Math.floor(Math.random() * 15) + 5;
                         let res = Math.floor(Math.random() * 30) + 20;
-                        return { q: `Translate to an algebraic sentence: 'A number $y$ is decreased by $${dec}$, and the result is $${res}$.'`, c: [`$y - ${dec} = ${res}$`, `$${dec} - y = ${res}$`, `$y + ${dec} = ${res}$`, `$y \\cdot ${dec} = ${res}$`], a: 0, h: "Decreased by signals subtraction directly from your starting variable." };
+                        let variants = [
+                            { q: `Write as an equation:<br>A number $y$ decreased by $${dec}$ is $${res}$.`, c: `$y - ${dec} = ${res}$`, w: [`$${dec} - y = ${res}$`, `$y + ${dec} = ${res}$`, `$y \\cdot ${dec} = ${res}$`] },
+                            { q: `Write as an equation:<br>The difference of $y$ and $${dec}$ is $${res}$.`, c: `$y - ${dec} = ${res}$`, w: [`$${dec} - y = ${res}$`, `$y + ${dec} = ${res}$`, `$\\frac{y}{${dec}} = ${res}$`] },
+                            { q: `Write as an equation:<br>$${dec}$ subtracted from $y$ equals $${res}$.`, c: `$y - ${dec} = ${res}$`, w: [`$y + ${dec} = ${res}$`, `$${dec} - y = ${res}$`, `$${res} - y = ${dec}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "trans1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Decreased by indicates subtraction from the variable." };
                     }
                     case "trans2": {
                         let mul = Math.floor(Math.random() * 8) + 3;
                         let yld = mul * (Math.floor(Math.random() * 9) + 4);
-                        return { q: `Translate to an algebraic sentence: '$${mul}$ times a number $x$ yields $${yld}$.'`, c: [`$${mul} + x = ${yld}$`, `$${mul}x = ${yld}$`, `$x - ${mul} = ${yld}$`, `$x + ${mul} = ${yld}$`], a: 1, h: "'Times' indicates standard multiplication between the target coefficient and variable." };
+                        let variants = [
+                            { q: `Write as an equation:<br>$${mul}$ times a number $x$ is $${yld}$.`, c: `$${mul}x = ${yld}$`, w: [`$${mul} + x = ${yld}$`, `$x - ${mul} = ${yld}$`, `$\\frac{x}{${mul}} = ${yld}$`] },
+                            { q: `Write as an equation:<br>The product of $${mul}$ and $x$ is $${yld}$.`, c: `$${mul}x = ${yld}$`, w: [`$${mul} + x = ${yld}$`, `$x \\cdot x = ${yld}$`, `$${mul} - x = ${yld}$`] },
+                            { q: `Write as an equation:<br>$x$ multiplied by $${mul}$ equals $${yld}$.`, c: `$${mul}x = ${yld}$`, w: [`$${mul} + x = ${yld}$`, `$\\frac{${mul}}{x} = ${yld}$`, `$x - ${mul} = ${yld}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "trans2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Product and times imply multiplication." };
                     }
                     case "seq1": {
                         let start = Math.floor(Math.random() * 6) + 2;
                         let diff = Math.floor(Math.random() * 5) + 4;
                         let s1 = start, s2 = s1 + diff, s3 = s2 + diff, s4 = s3 + diff, s5 = s4 + diff, s6 = s5 + diff;
-                        return { q: `Find the missing number in the sequence: $${s1}, ${s2}, ${s3}, \\dots, ${s5}, ${s6}$.`, c: [`$${s4 - 2}$`, `$${s4 + 1}$`, `$${s4}$`, `$${s4 + 3}$`], a: 2, h: "Calculate the fixed step addition interval setting consecutive numbers apart." };
+                        let variants = [
+                            { q: `Find the missing term:<br>$${s1}, ${s2}, ${s3}, \\dots, ${s5}, ${s6}$`, c: `$${s4}$`, w: [`$${s4 - 2}$`, `$${s4 + 1}$`, `$${s4 + 3}$`] },
+                            { q: `Find $?$:<br>$${s1}, ${s2}, ${s3}, ?, ${s5}$`, c: `$${s4}$`, w: [`$${s4 + 2}$`, `$${s4 - 1}$`, `$${s4 + 4}$`] },
+                            { q: `Complete the sequence:<br>$${s1}, ${s2}, ${s3}, \\underline{\\quad}, ${s5}$`, c: `$${s4}$`, w: [`$${s4 - 3}$`, `$${s4 + 2}$`, `$${s4 + 1}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "seq1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Find the constant number added between successive terms." };
                     }
                     case "seq2": {
                         let diff = Math.floor(Math.random() * 4) + 6;
                         let end = Math.floor(Math.random() * 15) + 20;
                         let s5 = end, s4 = s5 + diff, s3 = s4 + diff, s2 = s3 + diff, s1 = s2 + diff;
-                        return { q: `Find the missing number in the sequence: $${s1}, ${s2}, ${s3}, \\dots, ${s5}$.`, c: [`$${s4 - 3}$`, `$${s4}$`, `$${s4 + 2}$`, `$${s4 - 1}$`], a: 1, h: "Identify the constant reduction deduction occurring systematically at each position change." };
+                        let variants = [
+                            { q: `Find the missing term:<br>$${s1}, ${s2}, ${s3}, \\dots, ${s5}$`, c: `$${s4}$`, w: [`$${s4 - 3}$`, `$${s4 + 2}$`, `$${s4 - 1}$`] },
+                            { q: `Find the missing value:<br>$${s1}, ${s2}, ${s3}, \\boxed{\\quad}, ${s5}$`, c: `$${s4}$`, w: [`$${s4 + 3}$`, `$${s4 - 2}$`, `$${s4 + 1}$`] },
+                            { q: `Find $?$:<br>$${s1}, ${s2}, ${s3}, ?, ${s5}$`, c: `$${s4}$`, w: [`$${s4 - 4}$`, `$${s4 + 4}$`, `$${s4 - 2}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "seq2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Identify the constant value subtracted at each step." };
                     }
                     case "seq_rule1": {
-                        let d = Math.floor(Math.random() * 3) + 3;
-                        let offset = Math.floor(Math.random() * 4) + 1;
-                        let s1 = d - offset, s2 = 2*d - offset, s3 = 3*d - offset, s4 = 4*d - offset;
-                        return { q: `Which rule describes the sequence $${s1}, ${s2}, ${s3}, ${s4}, \\dots$ where $n$ represents the sequence position?`, c: [`$${d}n + ${offset}$`, `$${d+1}n - ${offset}$`, `$${d}n - ${offset}$`, `$n + ${d}$`], a: 2, h: "The consistent difference rate always maps directly as the multiplier attached to variable n." };
+                        // Plain language operation description instead of an explicit equation
+                        let diff = Math.floor(Math.random() * 5) + 3; 
+                        let start = Math.floor(Math.random() * 10) + 1;
+                        let s1 = start, s2 = s1 + diff, s3 = s2 + diff, s4 = s3 + diff;
+                        
+                        let variants = [
+                            { q: `Identify the pattern rule for this sequence:<br>$${s1}, ${s2}, ${s3}, ${s4}, \\dots$`, c: `Add ${diff}`, w: [`Subtract ${diff}`, `Multiply by ${diff}`, `Add ${diff + 2}`] },
+                            { q: `What operation is used to get the next term in the pattern:<br>$${s1}, ${s2}, ${s3}, ${s4}$`, c: `Add ${diff}`, w: [`Add ${diff - 1}`, `Multiply by 2`, `Subtract ${diff}`] },
+                            { q: `Find the rule connecting the numbers in this sequence:<br>$${s1}, ${s2}, ${s3}, ${s4}, \\dots$`, c: `Add ${diff}`, w: [`Subtract ${diff}`, `Add ${diff + 1}`, `Multiply by ${diff}`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "seq_rule1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Look at what you must do to get from one number to the very next number." };
                     }
                     case "seq_rule2": {
-                        let d = Math.floor(Math.random() * 3) + 2;
-                        let offset = Math.floor(Math.random() * 4) + 1;
-                        let s1 = d + offset, s2 = 2*d + offset, s3 = 3*d + offset, s4 = 4*d + offset;
-                        return { q: `What is the algebraic rule for the sequence $${s1}, ${s2}, ${s3}, ${s4}, \\dots$ where $n$ is the sequence position?`, c: [`$${d}n + ${offset}$`, `$${d+2}n$`, `$${d}n - ${offset}$`, `$${offset}n + ${d}$`], a: 0, h: "Isolate the sequence jump value first, then reconcile the balance constant for base step 1." };
+                        // Plain language operation description instead of an explicit equation
+                        let diff = Math.floor(Math.random() * 4) + 2; 
+                        let start = Math.floor(Math.random() * 15) + 30;
+                        let s1 = start, s2 = s1 - diff, s3 = s2 - diff, s4 = s3 - diff;
+                        
+                        let variants = [
+                            { q: `Identify the pattern rule for this sequence:<br>$${s1}, ${s2}, ${s3}, ${s4}, \\dots$`, c: `Subtract ${diff}`, w: [`Add ${diff}`, `Subtract ${diff + 1}`, `Divide by ${diff}`] },
+                            { q: `What operation is used to get the next term in the pattern:<br>$${s1}, ${s2}, ${s3}, ${s4}$`, c: `Subtract ${diff}`, w: [`Subtract ${diff - 1}`, `Divide by 2`, `Add ${diff}`] },
+                            { q: `Find the rule connecting the numbers in this sequence:<br>$${s1}, ${s2}, ${s3}, ${s4}, \\dots$`, c: `Subtract ${diff}`, w: [`Add ${diff}`, `Subtract ${diff + 2}`, `Multiply by 2`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "seq_rule2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Notice if the numbers are getting larger or smaller, and by how much each time." };
                     }
                     case "eq_two1": {
                         let x = Math.floor(Math.random() * 5) + 3;
                         let co = Math.floor(Math.random() * 3) + 2;
                         let k = Math.floor(Math.random() * 6) + 4;
                         let rhs = co * x + k;
-                        return { q: `Solve the two-step equation: $${co}x + ${k} = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${x + 4}$`, `$${x + 1}$`], a: 1, h: "Perform the inverse process for structural adjustments by taking constant from both sides." };
+                        let variants = [
+                            { q: `Solve for $x$:<br>$$${co}x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-1}$`, `$${x+2}$`, `$${x+1}$`] },
+                            { q: `Find $x$:<br>$$${co}x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-2}$`, `$${x+3}$`, `$${x-1}$`] },
+                            { q: `Solve for $x$:<br>$$${co}x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+1}$`, `$${x+2}$`, `$${x-1}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "eq_two1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Subtract the constant from both sides first, then divide." };
                     }
                     case "eq_two2": {
                         let x = Math.floor(Math.random() * 6) + 4;
                         let co = Math.floor(Math.random() * 3) + 2;
                         let k = Math.floor(Math.random() * 5) + 3;
                         let rhs = co * x - k;
-                        return { q: `Solve the two-step equation: $${co}x - ${k} = ${rhs}$`, c: [`$${x + 3}$`, `$${x - 1}$`, `$${x}$`, `$${x + 2}$`], a: 2, h: "Clear the subtraction element away using addition before dealing with the multiplier." };
+                        let variants = [
+                            { q: `Solve for $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+2}$`, `$${x-1}$`, `$${x+1}$`] },
+                            { q: `Find $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-2}$`, `$${x+3}$`, `$${x-1}$`] },
+                            { q: `Solve for $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+1}$`, `$${x-3}$`, `$${x+2}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "eq_two2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Add the constant value to both sides, then isolate x." };
                     }
                     case "eq_two3": {
                         let x = Math.floor(Math.random() * 4) + 5;
                         let co = Math.floor(Math.random() * 3) + 4;
                         let k = Math.floor(Math.random() * 6) + 2;
                         let rhs = co * x - k;
-                        return { q: `Solve the two-step equation: $${co}x - ${k} = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${x + 1}$`, `$${rhs + k}$`], a: 1, h: "Neutralize negative integers on the active layout by summing the value across." };
+                        let variants = [
+                            { q: `Solve for $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+1}$`, `$${x-2}$`, `$${x-1}$`] },
+                            { q: `Find $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+3}$`, `$${x-2}$`, `$${x+1}$`] },
+                            { q: `Solve for $x$:<br>$$${co}x - ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-1}$`, `$${x+2}$`, `$${x-3}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "eq_two3", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Perform the inverse operations step-by-step." };
                     }
                     case "eq_one1": {
                         let x = Math.floor(Math.random() * 15) + 10;
                         let k = Math.floor(Math.random() * 15) + 5;
                         let rhs = x + k;
-                        return { q: `Solve the one-step equation: $x + ${k} = ${rhs}$`, c: [`$${x - 5}$`, `$${x}$`, `$${x + 10}$`, `$${rhs + k}$`], a: 1, h: "Isolate x cleanly by calculating with the inverse behavior of basic addition." };
+                        let variants = [
+                            { q: `Solve for $x$:<br>$$x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-3}$`, `$${x+5}$`, `$${rhs}$`] },
+                            { q: `Find $x$:<br>$$x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x+2}$`, `$${x-5}$`, `$${rhs+k}$`] },
+                            { q: `Solve for $x$:<br>$$x + ${k} = ${rhs}$$`, c: `$${x}$`, w: [`$${x-1}$`, `$${x+4}$`, `$${k}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "eq_one1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Subtract the constant value from both sides." };
                     }
                     case "eq_one2": {
                         let x = Math.floor(Math.random() * 6) + 6;
                         let co = Math.floor(Math.random() * 5) + 5;
                         let rhs = co * x;
-                        return { q: `Solve the one-step equation: $${co}x = ${rhs}$`, c: [`$${x - 2}$`, `$${x}$`, `$${rhs - co}$`, `$${rhs * co}$`], a: 1, h: "Unbind values tied via coefficients by executing systemic division blocks." };
+                        let variants = [
+                            { q: `Solve for $x$:<br>$$${co}x = ${rhs}$$`, c: `$${x}$`, w: [`$${x+2}$`, `$${x-1}$`, `$${rhs-co}$`] },
+                            { q: `Find $x$:<br>$$${co}x = ${rhs}$$`, c: `$${x}$`, w: [`$${x+3}$`, `$${x-2}$`, `$${rhs+co}$`] },
+                            { q: `Solve for $x$:<br>$$${co}x = ${rhs}$$`, c: `$${x}$`, w: [`$${x-1}$`, `$${x+1}$`, `$${co}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "eq_one2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Divide both sides by the numerical coefficient." };
                     }
                     case "word1": {
                         let flat = Math.floor(Math.random() * 15) + 15;
                         let perM = Math.floor(Math.random() * 3) + 2;
                         let miles = Math.floor(Math.random() * 20) + 15;
                         let tot = flat + perM * miles;
-                        return { q: `A car rental costs $\\$${flat}$ plus $\\$${perM}$ per mile driven. If the total bill is $\\$${tot}$, which equation can be used to find the number of miles ($m$) driven?`, c: [`$${perM}m + ${flat} = ${tot}$`, `$${flat}m + ${perM} = ${tot}$`, `$${perM}m - ${flat} = ${tot}$`, `$${flat} + m = ${tot}$`], a: 0, h: "The flat fee acts as a constant, while the cost per mile scales with the variable m." };
+                        let variants = [
+                            { q: `Write as an equation:<br>The product of $${perM}$ and $m$, plus $${flat}$, equals $${tot}$.`, c: `$${perM}m + ${flat} = ${tot}$`, w: [`$${flat}m + ${perM} = ${tot}$`, `$${perM}m - ${flat} = ${tot}$`, `$${flat} + m = ${tot}$`] },
+                            { q: `Write as an equation:<br>$${flat}$ more than the product of $${perM}$ and $m$ is $${tot}$.`, c: `$${perM}m + ${flat} = ${tot}$`, w: [`$${flat}m + ${perM} = ${tot}$`, `$${perM}m = ${tot}$`, `$m + ${flat} = ${tot}$`] },
+                            { q: `Write as an equation:<br>The sum of $${perM}m$ and $${flat}$ equals $${tot}$.`, c: `$${perM}m + ${flat} = ${tot}$`, w: [`$(${flat} + ${perM})m = ${tot}$`, `$${flat}m + ${perM} = ${tot}$`, `$${perM}m - ${flat} = ${tot}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "word1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "The term with the variable is added to the constant." };
                     }
                     case "word2": {
                         let books = Math.floor(Math.random() * 3) + 3;
                         let costB = Math.floor(Math.random() * 4) + 2;
                         let pen = Math.floor(Math.random() * 3) + 2;
                         let tot = books * costB + pen;
-                        return { q: `Sam bought $${books}$ identical notebooks and a pen that costs $\\$${pen}$. If his total bill was $\\$${tot}$, how much did each notebook cost?`, c: [`$\\$${costB - 1}$`, `$\\$${costB}$`, `$\\$${costB + 1}$`, `$\\$${costB + 2}$`], a: 1, h: "Subtract the cost of the pen from the total before dividing by the number of notebooks." };
+                        let variants = [
+                            { q: `Solve for $b$:<br>$$${books}b + ${pen} = ${tot}$$`, c: `$${costB}$`, w: [`$${costB - 1}$`, `$${costB + 1}$`, `$${costB + 2}$`] },
+                            { q: `Find $b$:<br>$$${books}b + ${pen} = ${tot}$$`, c: `$${costB}$`, w: [`$${costB + 1}$`, `$${costB - 1}$`, `$${costB + 2}$`] },
+                            { q: `Solve for $b$:<br>$$${books}b + ${pen} = ${tot}$$`, c: `$${costB}$`, w: [`$${costB - 2}$`, `$${costB + 1}$`, `$${costB - 1}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "word2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Subtract the constant first, then divide by the coefficient." };
                     }
-                    case "scale1": return { q: "On a balanced scale, the left side has $3$ blocks of mass $x$ and a $5\\text{g}$ weight. The right side has a $20\\text{g}$ weight. Find $x$.", c: ["$5$", "$7$", "$15$", "$25$"], a: 0, h: "Prune identical auxiliary mass indicators evenly off baseline platforms.", type: "scale1" };
-                    case "scale2": return { q: "A balance scale is perfectly level. The left side holds $2$ blocks of mass $x$ and a $4\\text{kg}$ weight. The right side holds a $14\\text{kg}$ weight. Find $x$.", c: ["$5$", "$6$", "$9$", "$10$"], a: 0, h: "Formulate the linear state calculation structure directly: $2x + 4 = 14$.", type: "scale2" };
-                    case "seesaw1": return { q: "A seesaw is perfectly balanced. Left side: an unknown weight $w$ and a $10\\text{kg}$ weight. Right side: a $35\\text{kg}$ weight. Express this equation.", c: ["$10w = 35$", "$w - 10 = 35$", "$w + 10 = 35$", "$w + 35 = 10$"], a: 2, h: "Co-existing spatial components share additive parameters on a structural plane side.", type: "seesaw1" };
-                    case "seesaw2": return { q: "A balanced seesaw carries a crate of weight $x$ and a $15\\text{kg}$ pack on the left. The right side holds $45\\text{kg}$. Identify the equation.", c: ["$x - 15 = 45$", "$15x = 45$", "$x = 45 + 15$", "$x + 15 = 45$"], a: 3, h: "Group parallel platform layout characteristics visually to construct standard equations.", type: "seesaw2" };
+                    case "scale1": {
+                        let variants = [
+                            "Solve for $x$ from the balanced scale:",
+                            "Find $x$ using the layout diagram balance properties:",
+                            "Solve for the unknown variable block $x$:"
+                        ];
+                        return { type: "scale1", q: variants[variant], c: ["$5$", "$7$", "$15$", "$25$"], a: 0, h: "Form the linear equation: $3x + 5 = 20$." };
+                    }
+                    case "scale2": {
+                        let variants = [
+                            "Solve for $x$ from the balanced scale system:",
+                            "Find the value of $x$:",
+                            "Solve for $x$:"
+                        ];
+                        return { type: "scale2", q: variants[variant], c: ["$5$", "$6$", "$9$", "$10$"], a: 0, h: "Form the linear equation: $2x + 4 = 14$." };
+                    }
+                    case "seesaw1": {
+                        let variants = [
+                            "Find the equation modeled by the balanced seesaw:",
+                            "Which equation matches the balance diagram:",
+                            "Find the algebraic balance equation statement:"
+                        ];
+                        return { type: "seesaw1", q: variants[variant], c: ["$10w = 35$", "$w - 10 = 35$", "$w + 10 = 35$", "$w + 35 = 10$"], a: 2, h: "Combine items on the left side with standard addition equations." };
+                    }
+                    case "seesaw2": {
+                        let variants = [
+                            "Find the equation modeled by the balanced seesaw diagram:",
+                            "Which equation accurately matches the weight distribution:",
+                            "Find the equation state representation:"
+                        ];
+                        return { type: "seesaw2", q: variants[variant], c: ["$x - 15 = 45$", "$15x = 45$", "$x = 45 + 15$", "$x + 15 = 45$"], a: 3, h: "Items sitting together on the same side are combined using addition operations." };
+                    }
                     case "ineq1": {
                         let k = Math.floor(Math.random() * 6) + 4;
                         let r = Math.floor(Math.random() * 10) + 10;
-                        return { q: `Solve the one-step inequality: $x - ${k} > ${r}$`, c: [`$x > ${r - k}$`, `$x < ${r - k}$`, `$x > ${r + k}$`, `$x < ${r + k}$`], a: 2, h: "Inequality directional parameters hold unless handling standard negative multipliers." };
+                        let variants = [
+                            { q: `Solve the inequality for $x$:<br>$$x - ${k} > ${r}$$`, c: `$x > ${r + k}$`, w: [`$x > ${r - k}$`, `$x < ${r - k}$`, `$x < ${r + k}$`] },
+                            { q: `Find the solution range for $x$:<br>$$x - ${k} > ${r}$$`, c: `$x > ${r + k}$`, w: [`$x \\ge ${r + k}$`, `$x < ${r - k}$`, `$x > ${r - k}$`] },
+                            { q: `Solve for $x$:<br>$$x - ${k} > ${r}$$`, c: `$x > ${r + k}$`, w: [`$x < ${r + k}$`, `$x > ${r - k}$`, `$x \\le ${r + k}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "ineq1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Add the constant to both sides of the inequality boundary constraint." };
                     }
                     case "ineq2": {
                         let co = Math.floor(Math.random() * 4) + 3;
                         let factor = Math.floor(Math.random() * 5) + 4;
                         let r = co * factor;
-                        return { q: `Solve the one-step inequality: $${co}x \\le ${r}$`, c: [`$x \\le ${factor}$`, `$x \\ge ${factor}$`, `$x \\le ${r - co}$`, `$x \\le ${r * co}$`], a: 0, h: "Isolate structural variables directly through single-step reduction." };
+                        let variants = [
+                            { q: `Solve the inequality for $x$:<br>$$${co}x \\le ${r}$$`, c: `$x \\le ${factor}$`, w: [`$x \\ge ${factor}$`, `$x \\le ${r - co}$`, `$x \\le ${r * co}$`] },
+                            { q: `Find the solution range for $x$:<br>$$${co}x \\le ${r}$$`, c: `$x \\le ${factor}$`, w: [`$x < ${factor}$`, `$x \\ge ${factor}$`, `$x \\le ${factor + 2}$`] },
+                            { q: `Solve for $x$:<br>$$${co}x \\le ${r}$$`, c: `$x \\le ${factor}$`, w: [`$x \\ge ${factor}$`, `$x \\le ${r}$`, `$x < ${factor - 1}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "ineq2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Divide both sides by the numeric coefficient." };
                     }
-                    case "grid1": return { q: "Identify the coordinate structure matching the highlighted point $P$ plotted on the coordinate grid layer.", c: ["$(4, -3)$", "$(-3, 4)$", "$(-4, -3)$", "$(4, 3)$"], a: 0, h: "Coordinates track horizontal variations (x values) first, followed by vertical values (y).", type: "grid1" };
-                    case "grid2": return { q: "What are the coordinate measurements belonging to the central axis intersection point highlighted on the grid?", c: ["$(0, 0)$", "$(1, 1)$", "$(0, 1)$", "$(1, 0)$"], a: 0, h: "The absolute nexus zero point where spatial grid axis lines cross.", type: "grid2" };
-                    case "grid3": return { q: "Analyze the coordinate grid below carefully. What are the spatial coordinates of the highlighted point $Q$?", c: ["$(5, -2)$", "$(-2, 5)$", "$(-2, -5)$", "$(2, 5)$"], a: 1, h: "Trace your horizontal alignment displacement along the horizontal track first.", type: "grid3" };
-                    case "grid4": return { q: "A shape vertex point $A$ is translated to a new position labeled $A'$. Identify the final coordinate layout of $A'$.", c: ["$(-2, 1)$", "$(6, 5)$", "$(-2, 5)$", "$(6, 1)$"], a: 0, h: "Count units leftward along x axis, and units downward along y axis to find your spot.", type: "grid4" };
+                    case "grid1": {
+                        let variants = [
+                            "Find the coordinates of point $P$ on the mapping grid:",
+                            "Find the ordered pair values representing location $P$:",
+                            "Find the coordinate layout location $(x, y)$ of point $P$:"
+                        ];
+                        return { type: "grid1", q: variants[variant], c: ["$(4, -3)$", "$(-3, 4)$", "$(-4, -3)$", "$(4, 3)$"], a: 0, h: "Trace values down to the horizontal x-axis first, then read across to the vertical y-axis." };
+                    }
+                    case "grid2": {
+                        let variants = [
+                            "Find the coordinates of the origin center point intersection:",
+                            "Find the accurate ordered pair values for the origin location:",
+                            "Find the coordinates of the map origin point location:"
+                        ];
+                        return { type: "grid2", q: variants[variant], c: ["$(0, 0)$", "$(1, 1)$", "$(0, 1)$", "$(1, 0)$"], a: 0, h: "The absolute zero baseline center intersection point of a standard grid mapping system matrix." };
+                    }
+                    case "grid3": {
+                        let variants = [
+                            "Find the coordinates of point $Q$ mapping location:",
+                            "Find the ordered pair for $Q$:",
+                            "Find the grid coordinates $(x, y)$ of location node $Q$:"
+                        ];
+                        return { type: "grid3", q: variants[variant], c: ["$(-2, 5)$", "$(5, -2)$", "$(-2, -5)$", "$(2, 5)$"], a: 0, h: "Evaluate cross-grid horizontal displacement properties before identifying track elevation offsets." };
+                    }
+                    case "grid4": {
+                        let variants = [
+                            "Find the shifted coordinate location matching point $A'$:",
+                            "Find the ordered pair for node $A'$ layout paths:",
+                            "Find the destination point coordinates $(x, y)$ of location node $A'$:"
+                        ];
+                        return { type: "grid4", q: variants[variant], c: ["$(-2, 1)$", "$(6, 5)$", "$(-2, 5)$", "$(6, 1)$"], a: 0, h: "Locate target node markers directly relative to your origin track lines." };
+                    }
                     case "table1": {
                         let m = Math.floor(Math.random() * 2) + 2; 
                         let b = Math.floor(Math.random() * 3) + 1; 
-                        return { q: "Look at the patterns matching values inside the function data block. Which equation accurately models the relationship between $x$ and $y$?", c: [`$y = ${m-1}x + ${b}$`, `$y = ${m}x - ${b}$`, `$y = ${m+1}x - 2$`, `$y = ${m}x$`], a: 1, h: "Determine the linear change step in y for each single value step increment in x.", type: "table1", vars: {m: m, b: -b} };
+                        let variants = [
+                            { q: "Find the structural function equation rule for the grid dataset table:", c: `$y = ${m}x - ${b}$`, w: [`$y = ${m-1}x + ${b}$`, `$y = ${m+1}x - 2$`, `$y = ${m}x$`] },
+                            { q: "Find the math formula pattern statement mapping data tracks from the table layout matrix:", c: `$y = ${m}x - ${b}$`, w: [`$y = x - ${b}$`, `$y = ${m}x + ${b}$`, `$y = \\frac{x}{${m}}$`] },
+                            { q: "Find the custom table functional algebraic transformation equation rule:", c: `$y = ${m}x - ${b}$`, w: [`$y = ${m}x$`, `$y = ${m+2}x - ${b}$`, `$y = x + ${m}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "table1", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Look at the rate of output changes across successive steps to determine the multiplier coefficient.", vars: {m: m, b: -b} };
                     }
                     case "table2": {
                         let m = Math.floor(Math.random() * 2) + 2;
                         let b = Math.floor(Math.random() * 3) + 3;
-                        return { q: "Analyze the input-output combinations mapped inside the algebraic table matrix. Which functional rule defines the layout pattern?", c: [`$y = x + ${b+1}$`, `$y = ${m}x + ${b}$`, `$y = ${m+1}x + ${b-1}$`, `$y = ${m}x + ${b-2}$`], a: 1, h: "Test your multiplier rates on input zero or position step 1 to locate the offset.", type: "table2", vars: {m: m, b: b} };
+                        let variants = [
+                            { q: "Find the mathematical operational conversion function mapping rule for this table matrix:", c: `$y = ${m}x + ${b}$`, w: [`$y = x + ${b+1}$`, `$y = ${m+1}x + ${b-1}$`, `$y = ${m}x + ${b-2}$`] },
+                            { q: "Identify the expression pattern defining the input-output mapping distribution below:", c: `$y = ${m}x + ${b}$`, w: [`$y = ${m}x - ${b}$`, `$y = ${m+2}x$`, `$y = x + ${b}$`] },
+                            { q: "Find the conversion rule for this distribution matrix mapping dataset table:", c: `$y = ${m}x + ${b}$`, w: [`$y = ${m}x$`, `$y = ${m-1}x + ${b+2}$`, `$y = x - ${b}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "table2", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Look at output values directly when input values are zero to identify base offsets easily.", vars: {m: m, b: b} };
+                    }
+                    case "shape_growing_dots": {
+                        let targetLevel = Math.floor(Math.random() * 5) + 5; 
+                        let correctAns = targetLevel * targetLevel;
+                        let variants = [
+                            { q: `Using the sequence trend logic, find the total count of dots contained within structural <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel * 2}$`, `$${(targetLevel + 1) * (targetLevel + 1)}$`, `$${correctAns - targetLevel}$`] },
+                            { q: `Calculate the total node dot matrix count required to populate structural <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel + 4}$`, `$${targetLevel * 3}$`, `$${correctAns + targetLevel}$`] },
+                            { q: `Find the geometric visual layout dot summation score tracking step results down to <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel * 2}$`, `$${correctAns - 2}$`, `$${targetLevel * 4}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "shape_visual_dots", q: active.q, c: setup.choices, a: setup.answerIndex, h: "The dot system scales quadratically using structural grid exponent rules ($n^2$).", vars: { target: targetLevel } };
+                    }
+                    case "shape_growing_squares": {
+                        let targetLevel = Math.floor(Math.random() * 5) + 5; 
+                        let correctAns = 2 * targetLevel + 1;
+                        let variants = [
+                            { q: `Find the total count of operational block unit squares needed to build up structural <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel * 2}$`, `$${targetLevel * 3}$`, `$${2 * targetLevel - 1}$`] },
+                            { q: `Determine the complete square blocks summation footprint populating path <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel + 2}$`, `$${targetLevel * 2}$`, `$${correctAns + 3}$`] },
+                            { q: `Calculate the precise grid block units total forming baseline <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel * 4}$`, `$${2 * targetLevel}$`, `$${targetLevel + 1}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "shape_visual_squares", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Track constant incremental linear growth rates between adjacent geometric blocks ($2n + 1$).", vars: { target: targetLevel } };
+                    }
+                    case "shape_linear_dots": {
+                        let targetLevel = Math.floor(Math.random() * 5) + 5; 
+                        let correctAns = 3 * targetLevel - 1;
+                        let variants = [
+                            { q: `Find the total count of orange node dots structured inside vector <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${3 * targetLevel}$`, `$${2 * targetLevel + 2}$`, `$${3 * targetLevel + 1}$`] },
+                            { q: `Determine the complete dot array summation trace needed for layout <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${targetLevel * 3}$`, `$${correctAns - 3}$`, `$${2 * targetLevel}$`] },
+                            { q: `Find the geometric visual path tracking dot distribution total inside <b>Level $${targetLevel}$</b>:`, c: `$${correctAns}$`, w: [`$${3 * targetLevel + 2}$`, `$${3 * targetLevel}$`, `$${targetLevel + 9}$`] }
+                        ];
+                        let active = variants[variant];
+                        let setup = createChoices(active.c, active.w);
+                        return { type: "shape_visual_line", q: active.q, c: setup.choices, a: setup.answerIndex, h: "Determine the step-to-step expansion delta to form your linear scaling equation rule ($3n - 1$).", vars: { target: targetLevel } };
                     }
                 }
             });
@@ -309,6 +551,7 @@
             userAnswers = Array(questions.length).fill(null);
             currentIdx = 0;
             document.getElementById('titleScreen').style.display = 'none';
+            document.getElementById('scoreScreen').style.display = 'none';
             document.getElementById('testScreen').style.display = 'block';
             buildPagination();
             loadQuestion();
@@ -323,25 +566,23 @@
 
             const cc = document.getElementById('canvasContainer');
             const tp = document.getElementById('tablePlacement');
+            const sc = document.getElementById('shapeSequenceContainer');
             const canvas = document.getElementById('balanceCanvas');
             
             if (qData.type && qData.type.startsWith('grid')) {
-                cc.style.display = 'block';
-                tp.style.display = 'none';
-                canvas.height = 320;
-                drawDiagram(qData.type);
+                cc.style.display = 'block'; tp.style.display = 'none'; sc.style.display = 'none';
+                canvas.height = 320; drawDiagram(qData.type);
             } else if (qData.type && (qData.type.startsWith('scale') || qData.type.startsWith('seesaw'))) {
-                cc.style.display = 'block';
-                tp.style.display = 'none';
-                canvas.height = 240;
-                drawDiagram(qData.type);
+                cc.style.display = 'block'; tp.style.display = 'none'; sc.style.display = 'none';
+                canvas.height = 240; drawDiagram(qData.type);
             } else if (qData.type && qData.type.startsWith('table')) {
-                cc.style.display = 'none';
-                tp.style.display = 'flex';
+                cc.style.display = 'none'; tp.style.display = 'flex'; sc.style.display = 'none';
                 buildFunctionTable(qData);
+            } else if (qData.type && qData.type.startsWith('shape_visual')) {
+                cc.style.display = 'none'; tp.style.display = 'none'; sc.style.display = 'flex';
+                buildVectorShapeSequence(qData.type, qData.vars);
             } else {
-                cc.style.display = 'none';
-                tp.style.display = 'none';
+                cc.style.display = 'none'; tp.style.display = 'none'; sc.style.display = 'none';
             }
 
             const container = document.getElementById('choicesContainer');
@@ -373,6 +614,58 @@
             
             if (window.MathJax && window.MathJax.typesetPromise) {
                 window.MathJax.typesetPromise();
+            }
+        }
+
+        function buildVectorShapeSequence(type, vars) {
+            const container = document.getElementById('shapeSequenceContainer');
+            container.innerHTML = ''; 
+            
+            for(let lvl = 1; lvl <= 3; lvl++) {
+                const stepBox = document.createElement('div');
+                stepBox.className = 'shape-step-box';
+                
+                const title = document.createElement('div');
+                title.className = 'shape-step-title';
+                title.innerHTML = `Level $${lvl}$`;
+                stepBox.appendChild(title);
+
+                const grid = document.createElement('div');
+                grid.className = 'shape-grid-display';
+
+                if (type === 'shape_visual_dots') {
+                    grid.style.gridTemplateColumns = `repeat(${lvl}, 14px)`;
+                    for(let d = 0; d < lvl * lvl; d++) {
+                        const dot = document.createElement('div');
+                        dot.className = 'dot-node';
+                        grid.appendChild(dot);
+                    }
+                } else if (type === 'shape_visual_squares') {
+                    grid.style.gridTemplateColumns = `repeat(3, 16px)`;
+                    for(let cell = 0; cell < 9; cell++) {
+                        const sq = document.createElement('div');
+                        sq.className = 'square-node';
+                        if (cell === 4 || (cell === 1 && lvl >= 2) || (cell === 7 && lvl >= 2) || (cell === 3 && lvl >= 3) || (cell === 5 && lvl >= 3)) {
+                            grid.appendChild(sq);
+                        } else {
+                            const empty = document.createElement('div');
+                            empty.style.width = '16px'; empty.style.height = '16px';
+                            grid.appendChild(empty);
+                        }
+                    }
+                } else if (type === 'shape_visual_line') {
+                    let targetNodesCount = 3 * lvl - 1;
+                    grid.style.gridTemplateColumns = `repeat(${lvl * 2}, 14px)`;
+                    for(let nodeIdx = 0; nodeIdx < targetNodesCount; nodeIdx++) {
+                        const dNode = document.createElement('div');
+                        dNode.className = 'dot-node';
+                        dNode.style.background = '#d97706';
+                        grid.appendChild(dNode);
+                    }
+                }
+
+                stepBox.appendChild(grid);
+                container.appendChild(stepBox);
             }
         }
 
@@ -416,7 +709,7 @@
                 ctx.strokeStyle = '#b45309'; ctx.lineWidth = 4;
                 ctx.beginPath(); ctx.moveTo(40, 130); ctx.lineTo(120, 130); ctx.moveTo(380, 130); ctx.lineTo(460, 130); ctx.stroke();
 
-                ctx.font = 'bold 13px sans-serif';
+                ctx.font = 'italic 14px sans-serif';
                 if (type === 'scale1') {
                     drawBlock(ctx, 48, 105, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 70, 105, 'x', '#1e293b', '#b45309'); drawBlock(ctx, 92, 105, 'x', '#1e293b', '#b45309');
                     drawBlock(ctx, 70, 80, '5g', '#0f172a', '#10b981'); drawBlock(ctx, 400, 100, '20g', '#0f172a', '#10b981', 35, 30);
@@ -429,7 +722,7 @@
                 ctx.beginPath(); ctx.moveTo(250, 150); ctx.lineTo(230, 190); ctx.lineTo(270, 190); ctx.closePath(); ctx.fill(); ctx.stroke();
                 ctx.strokeStyle = '#b45309'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(50, 150); ctx.lineTo(450, 150); ctx.stroke();
 
-                ctx.font = 'bold 13px sans-serif';
+                ctx.font = 'italic 14px sans-serif';
                 if (type === 'seesaw1') {
                     drawBlock(ctx, 90, 120, 'w', '#1e293b', '#b45309'); drawBlock(ctx, 130, 120, '10kg', '#0f172a', '#10b981', 35, 30);
                     drawBlock(ctx, 350, 110, '35kg', '#0f172a', '#10b981', 45, 40);
@@ -447,8 +740,8 @@
                 ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 2.5;
                 ctx.beginPath(); ctx.moveTo(centerX - 230, centerY); ctx.lineTo(centerX + 230, centerY); ctx.moveTo(centerX, 10); ctx.lineTo(centerX, 310); ctx.stroke();
 
-                ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px sans-serif'; ctx.fillText('x', centerX + 240, centerY); ctx.fillText('y', centerX, 5);
-                ctx.font = 'bold 10px sans-serif'; ctx.fillStyle = '#94a3b8';
+                ctx.fillStyle = '#f8fafc'; ctx.font = 'italic 14px sans-serif'; ctx.fillText('x', centerX + 240, centerY); ctx.fillText('y', centerX, 5);
+                ctx.font = 'normal 10px sans-serif'; ctx.fillStyle = '#94a3b8';
                 for(let i = -10; i <= 10; i++) {
                     if(i === 0) continue;
                     ctx.fillText(i, centerX + i * scale, centerY + 14); ctx.fillText(-i, centerX - 14, centerY + i * scale);
@@ -473,7 +766,7 @@
         function plotPoint(ctx, px, py, label, color) {
             ctx.fillStyle = color; ctx.beginPath(); ctx.arc(px, py, 6, 0, 2 * Math.PI); ctx.fill();
             ctx.strokeStyle = '#0f172a'; ctx.lineWidth = 1.5; ctx.stroke();
-            ctx.fillStyle = '#f8fafc'; ctx.font = 'bold 13px sans-serif'; ctx.fillText(label, px + 15, py - 12);
+            ctx.fillStyle = '#f8fafc'; ctx.font = 'italic 13px sans-serif'; ctx.fillText(label, px + 15, py - 12);
         }
 
         function handleSelect(choiceIdx) {
@@ -523,14 +816,14 @@
             document.getElementById('finalScore').innerText = `${totalCorrect} / ${questions.length}`;
             
             let percentage = (totalCorrect / questions.length) * 100;
-            let msg = percentage >= 85 ? "Excellent core concept comprehension! You are ready for advanced algebraic structures." : "Solid progression work! Review noted strategy hints to secure total proficiency.";
+            let msg = percentage >= 85 ? "Excellent core concept comprehension!" : "Solid progression work! Review noted strategy hints.";
             document.getElementById('scoreFeedback').innerText = msg;
         }
 
         function restartTest(shouldMutateDataset) {
             document.getElementById('scoreScreen').style.display = 'none';
             if (shouldMutateDataset) {
-                startTest();
+                startTest(); 
             } else {
                 document.getElementById('titleScreen').style.display = 'flex';
             }
